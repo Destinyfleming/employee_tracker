@@ -11,23 +11,41 @@ const connection = mysql.createConnection({
   });
   connection.connect( (err) => {
       if (err) throw err;
-      askQuestions();
+      userPrompt();
   });
-  const askQuestions = () => {
+  const userPrompt = () => {
       inquirer.prompt({
           name: 'action',
           type: 'list',
           message: 'What would you like to do?',
           choices: [
               'look at a department',
-              'create a department'
+              'look at manager',
+              'look at employee',
+              'add a department',
+              'add a manager',
+              'add an employee'
           ]
-      }).then( (answer) => {
-          if (answer.action == 'look at a department') {
-              connection.query("SELECT * FROM departments", (err, res) => {
-                  if (err) throw err;
-                  console.log(res);
-              })
-          }
-      })
-  }
+      }).then(function ({ task }) {
+        switch (task) {
+        case "look at a department":
+            //function to view department
+          break;
+        case "look at manager":
+            //function to view manager
+          break;
+        case "look at employee":
+            //function to view employee
+           break;
+        case "add a department":
+            //function to add department
+           break;     
+        case "add a manager":
+            //function to add manager
+           break;
+        case "add a employee":
+            //function to add employee
+           break;                                 
+        }
+    });
+}
